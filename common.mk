@@ -32,6 +32,7 @@ PRODUCT_PACKAGES += \
     android.hardware.audio.service \
     android.hardware.bluetooth.audio-impl \
     android.hidl.allocator@1.0.vendor \
+    audio.primary.default \
     audio.bluetooth.default \
     audio.r_submix.default \
     audio.usb.default \
