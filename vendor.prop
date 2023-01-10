@@ -82,6 +82,9 @@ zygote.critical_window.minute=10
 ro.sf.blurs_are_expensive=1
 ro.surface_flinger.supports_background_blur=1
 
+# Apex
+ro.apex.updatable=false
+
 # Need adb on bringup
 ro.secure=0
 ro.adb.secure=0
