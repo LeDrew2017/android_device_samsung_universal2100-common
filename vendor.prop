@@ -36,6 +36,7 @@ ro.frp.pst=/dev/block/persistent
 ro.fastbootd.available=true
 
 # Graphics
+debug.renderengine.backend=threaded
 debug.sf.auto_latch_unsignaled=false
 ro.hardware.vulkan=mali
 ro.opengles.version=196610
