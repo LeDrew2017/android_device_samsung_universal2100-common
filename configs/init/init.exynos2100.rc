@@ -1004,3 +1004,15 @@ service watchdogd /system/bin/watchdogd 10 30
     oneshot
     priority -10
     seclabel u:r:watchdogd:s0
+
+service vendor.nfc_hal_service /vendor/bin/hw/android.hardware.nfc_snxxx@1.2-service
+    override
+    class hal
+    user nfc
+    group nfc
+
+service vendor.secure_element_hal_service /vendor/bin/hw/android.hardware.secure_element_snxxx@1.2-service
+    override
+    class hal
+    user secure_element
+    group secure_element
