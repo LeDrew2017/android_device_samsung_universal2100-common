@@ -1010,9 +1010,3 @@ service vendor.nfc_hal_service /vendor/bin/hw/android.hardware.nfc_snxxx@1.2-ser
     class hal
     user nfc
     group nfc
-
-service vendor.secure_element_hal_service /vendor/bin/hw/android.hardware.secure_element_snxxx@1.2-service
-    override
-    class hal
-    user secure_element
-    group secure_element

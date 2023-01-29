@@ -62,7 +62,6 @@ PRODUCT_COPY_FILES += \
     $(COMMON_PATH)/configs/init/init.udfps.rc:$(TARGET_COPY_OUT_VENDOR)/etc/init/init.udfps.rc \
     $(COMMON_PATH)/configs/init/init.debug.rc:$(TARGET_COPY_OUT_VENDOR)/etc/init/init.debug.rc
 
-
 # Keymaster
 PRODUCT_PACKAGES += \
     android.hardware.keymaster@4.0-service.samsung \
@@ -240,11 +239,9 @@ PRODUCT_PACKAGES += \
 # NFC
 PRODUCT_PACKAGES += \
     android.hardware.nfc_snxxx@1.2-service \
-    android.hardware.secure_element_snxxx@1.2-service \
     com.android.nfc_extras \
     libchrome.vendor \
     NfcNci \
-    SecureElement \
     Tag
 
 PRODUCT_COPY_FILES += \

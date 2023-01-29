@@ -371,10 +371,6 @@ vendor/etc/libnfc-nxp.conf
 vendor/etc/nfc/libnfc-nxp_RF.conf:vendor/libnfc-nxp_RF.conf
 vendor/firmware/nfc/libsn100u_fw.so:vendor/lib64/libsn100u_fw.so
 
-# Secure Element
-vendor/bin/hw/android.hardware.secure_element@1.2-service
-vendor/etc/init/android.hardware.secure_element@1.2-service.rc
-
 # Sensors
 vendor/lib/sensors.flicker.so
 vendor/lib/sensors.grip.so
