@@ -2,7 +2,7 @@ import /vendor/etc/init/hw/init.samsung.rc
 
 on early-init
     mkdir /mnt/vendor/efs 0771 radio system
-    mkdir /mnt/vendor/cpefs 0771 radio system    
+    mkdir /mnt/vendor/cpefs 0771 radio system   
     mkdir /mnt/vendor/persist 0771 system system
     mount debugfs /sys/kernel/debug /sys/kernel/debug
     exec u:r:vendor_modprobe:s0 -- /vendor/bin/modprobe -a -d /vendor/lib/modules input_booster_lkm.ko
@@ -174,7 +174,7 @@ on init
     write /sys/kernel/ems/energy_step/coregroup4/uclamp_busy_ratio 80
     write /sys/kernel/ems/energy_step/coregroup4/uclamp_max 790
     write /sys/kernel/ems/energy_step/coregroup4/uclamp_monitor_len 10
-
+ 
     # exynos-ufcc
     chown root system /sys/devices/platform/exynos-ufcc/ufc/cpufreq_min_limit
     chown root system /sys/devices/platform/exynos-ufcc/ufc/cpufreq_max_limit
@@ -211,7 +211,7 @@ on init
     write /proc/sys/net/core/wmem_max 8388608
     write /proc/sys/net/core/optmem_max 20480
     write /proc/sys/net/core/netdev_max_backlog 100000
-    write /proc/sys/net/ipv4/tcp_rmem "2097152 4194304 8388608"
+    write /proc/sys/net/ipv4/tcp_rmem "2097152 4194304 16777216"
     write /proc/sys/net/ipv4/tcp_wmem "524288 1048576 4194304"
     write /proc/sys/net/ipv4/tcp_mem "44259 59012 88518"
     write /proc/sys/net/ipv4/udp_mem "88518 118025 177036"
@@ -354,6 +354,33 @@ on init
 	
 # DATA_INJECTION
     chown system radio /sys/class/sensors/ssp_sensor/data_injection_enable
+
+
+# Range Sensor
+    chown system radio /sys/class/sensors/range_sensor/ambient
+    chown system radio /sys/class/sensors/range_sensor/cal01
+    chown system radio /sys/class/sensors/range_sensor/cal02
+    chown system radio /sys/class/sensors/range_sensor/cal_uid
+    chown system radio /sys/class/sensors/range_sensor/calibration
+    chown system radio /sys/class/sensors/range_sensor/enable
+    chown system radio /sys/class/sensors/range_sensor/frame_rate
+    chown system radio /sys/class/sensors/range_sensor/fw_version
+    chown system radio /sys/class/sensors/range_sensor/mode
+    chown system radio /sys/class/sensors/range_sensor/name
+    chown system radio /sys/class/sensors/range_sensor/range_sigma
+    chown system radio /sys/class/sensors/range_sensor/status
+    chown system radio /sys/class/sensors/range_sensor/target_status
+    chown system radio /sys/class/sensors/range_sensor/temp
+    chown system radio /sys/class/sensors/range_sensor/test01
+    chown system radio /sys/class/sensors/range_sensor/test02
+    chown system radio /sys/class/sensors/range_sensor/test03
+    chown system radio /sys/class/sensors/range_sensor/test_mode
+    chown system radio /sys/class/sensors/range_sensor/uid
+    chown system radio /sys/class/sensors/range_sensor/vendor
+    chown system radio /sys/class/sensors/range_sensor/zone
+    chown system radio /sys/class/sensors/range_sensor/file_cal
+    chown system radio /sys/class/sensors/range_sensor/file_p2p
+    chown system radio /sys/class/sensors/range_sensor/file_shape
 
 # setup cgroup freezer for freecess
     mkdir /dev/freezer
@@ -505,6 +532,14 @@ on post-fs-data
     chown system radio /sys/class/camera/rear/rear3_afcal
     chown system radio /sys/class/camera/rear/rear3_tilt
     chown system radio /sys/class/camera/rear/rear3_moduleid
+    chown system radio /sys/class/camera/rear/rear4_camfw
+    chown system radio /sys/class/camera/rear/rear4_camfw_full
+    chown system radio /sys/class/camera/rear/rear4_checkfw_user
+    chown system radio /sys/class/camera/rear/rear4_checkfw_factory
+    chown system radio /sys/class/camera/rear/rear4_afcal
+    chown system radio /sys/class/camera/rear/rear4_paf_cal_check
+    chown system radio /sys/class/camera/rear/rear4_tilt
+    chown system radio /sys/class/camera/rear/rear4_moduleid
     chown system radio /sys/class/camera/rear/rear_f2_paf_offset_mid
     chown system radio /sys/class/camera/rear/rear_f2_paf_offset_far
     chown system radio /sys/class/camera/rear/rear_f2_paf_cal_check
@@ -527,6 +562,7 @@ on post-fs-data
     chown cameraserver cameraserver /sys/class/camera/rear/rear_sensorid_exif
     chown cameraserver cameraserver /sys/class/camera/rear/rear2_sensorid_exif
     chown cameraserver cameraserver /sys/class/camera/rear/rear3_sensorid_exif
+    chown cameraserver cameraserver /sys/class/camera/rear/rear4_sensorid_exif
     chown cameraserver system /sys/class/camera/rear/rear_tofcal
     chown cameraserver system /sys/class/camera/rear/rear_tofcal_extra
     chown cameraserver system /sys/class/camera/rear/rear_tofcal_size
@@ -538,8 +574,6 @@ on post-fs-data
     chown system radio /sys/class/camera/rear/rear_tof_checkfw_factory
     chown system system /sys/class/camera/rear/rear4_hwparam
     chown system radio /sys/class/camera/rear/rear4_moduleid
-    chown system radio /sys/class/camera/rear/rear4_afcal
-    chown system radio /sys/class/camera/rear/rear4_paf_cal_check
     chown system radio /sys/class/camera/rear/rear_tof_tilt
     chown system radio /sys/class/camera/rear/rear2_tof_tilt
     chown system radio /sys/class/camera/rear/rear_tof_cal_result
@@ -592,8 +626,10 @@ on post-fs-data
     chown system radio /sys/class/camera/ois/autotest
     chown system radio /sys/class/camera/ois/ois_gain_rear
     chown system radio /sys/class/camera/ois/ois_gain_rear3
+    chown system radio /sys/class/camera/ois/ois_gain_rear4
     chown system radio /sys/class/camera/ois/ois_supperssion_ratio_rear
     chown system radio /sys/class/camera/ois/ois_supperssion_ratio_rear3
+    chown system radio /sys/class/camera/ois/ois_supperssion_ratio_rear4
     chown system radio /sys/class/camera/ois/ois_hall_position
     chown system radio /sys/class/camera/ois/rear3_read_cross_talk
     chown system radio /sys/class/camera/ois/ois_ext_clk
@@ -682,10 +718,20 @@ on post-fs-data
 # MST/NFC Switch
     chmod 0660 /dev/mst_ctrl
 
+# For Range Sensor
+    chmod 0660 /dev/range_sensor
+    chown system system /dev/range_sensor
+    mkdir /efs/FactoryApp/range_sensor 0775 system system
+    copy /system/etc/generic_xtalk_shape.bin /efs/FactoryApp/range_sensor/generic_xtalk_shape.bin
+    chown system system /efs/FactoryApp/range_sensor/cal_data.bin
+    chmod 0660 /efs/FactoryApp/range_sensor/cal_data.bin
+    chown system system /efs/FactoryApp/range_sensor/generic_xtalk_shape.bin
+    chmod 0660 /efs/FactoryApp/range_sensor/generic_xtalk_shape.bin
+
 # set syste:system for npu, dnc maxlock
     chown system system /sys/devices/platform/npu_exynos/qos_freq
     chown system system /sys/devices/platform/npu_exynos/qos_freq/npu_freq_maxlock
-    
+
 on boot
 # SDHMS Slowdown : Cpuset
     mkdir /dev/cpuset/abnormal
@@ -754,6 +800,10 @@ on boot
     chmod 0664 /sys/class/sec/ap_sub_pmic/power_meter/adc_ctrl1
     chmod 0664 /sys/class/sec/ap_sub_pmic/power_meter/adc_en
     chmod 0664 /sys/class/sec/ap_sub_pmic/power_meter/adc_sync_mode
+
+    # PMIC: S2DOS05 Display PMIC
+    chown system system /sys/class/sec/disp_pmic/enable_fd
+    chown system system /sys/class/sec/disp_pmic/power_meter/adc_mode
 
  # Bluetooth
     chown bluetooth bluetooth /dev/ttySAC1
@@ -826,8 +876,8 @@ on boot
     chown mediacodec system /sys/kernel/gpu/gpu_poweroff_delay
     chmod 0664 /sys/kernel/gpu/gpu_poweroff_delay
     chown mediacodec system /sys/kernel/gpu/gpu_mm_min_clock
-    chmod 0664 /sys/kernel/gpu/gpu_mm_min_clock
-    
+    chmod 0664 /sys/kernel/gpu/gpu_mm_min_clock    
+
 # Permission for UWB driver
     chmod 0660 /dev/sr100
     chown uwb uwb /dev/sr100
@@ -904,6 +954,13 @@ on fs
     mkdir /mnt/vendor/persist/data/sfs 0700 system system
     mkdir /mnt/vendor/persist/data/tz 0700 system system
 
+    # Enable rmnet data and aggregation
+    setprop persist.rmnet.mux enabled
+    setprop persist.rmnet.data.enable true
+    setprop persist.data.wda.enable true
+    setprop persist.data.df.agg.dl_pkt 10
+    setprop persist.data.df.agg.dl_size 4096
+
 # VM dirty thresh setting
     write /proc/sys/vm/dirty_bytes 104857600
     write /proc/sys/vm/dirty_background_bytes 26214400
@@ -943,8 +1000,9 @@ on fs
     chown system system /sys/class/lcd/panel/ccd_state
     chown system radio /sys/class/lcd/panel/conn_det
     chown system system /sys/class/lcd/panel/vrr
+    chown system system /sys/class/lcd/panel/vrr_lfd
+    chown system system /sys/class/lcd/panel/brightdot
     chown system system /sys/class/lcd/panel/alpm
-    chown system system /sys/class/lcd/panel/enable_fd
     chown system system /sys/class/lcd/panel/brt_avg
     chown system system /sys/class/lcd/panel/dpci
     chown system system /sys/class/lcd/panel/dpci_dbg
@@ -962,7 +1020,6 @@ on fs
 # Permissions for mAFPC
     chmod 0660 /dev/mafpc
     chown system system /dev/mafpc
-
 
 # Permissions for MDNIE
     chown system media_rw /sys/class/mdnie/mdnie/mode
@@ -1004,6 +1061,20 @@ service watchdogd /system/bin/watchdogd 10 30
     oneshot
     priority -10
     seclabel u:r:watchdogd:s0
+
+on property:sys.boot_completed=1
+    start insmod_sh_common
+
+service insmod_sh_common /vendor/bin/init.insmod.sh /vendor/etc/init.insmod.${ro.hardware}.cfg
+    class main
+    user root
+    group root system
+    disabled
+    oneshot
+
+# Range Sensor
+on property:sys.boot_completed=1
+    write /sys/class/sensors/range_sensor/calibration 0
 
 service vendor.nfc_hal_service /vendor/bin/hw/android.hardware.nfc_snxxx@1.2-service
     override
